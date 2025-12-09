@@ -1,0 +1,222 @@
+:root{
+    --pri: #452829;
+    --sec: #57595B;
+    --tri1: #f2d8ca;
+    --tri2: #F3E8DF;
+}
+@font-face {
+    font-family: bold;
+    src: url(./fonnts.com-Aeonik-Bold.ttf);
+}
+@font-face {
+    font-family: regular;
+    src: url(./fonnts.com-Aeonik-Regular.ttf);
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: regular;
+}
+html,body{
+    height: 100%;
+    width: 100%;
+}
+#main{
+    width: 100%;
+}
+section.allElems{
+    width: 100%;
+    background-color: var(--pri);
+    padding: 40px 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 40px;
+    position: absolute;
+}
+.elem{
+    flex-shrink: 0;
+    height: 300px;
+    width: 280px;
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+    transition: all ease 0.5s;
+}
+.elem img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.elem h2{
+    position: absolute;
+    bottom: 3.5%;
+    right: 5%;
+    font-size: 33px;
+    color: var(--tri2);
+
+}
+.elem:active{
+    scale: 0.97;
+}
+
+.fullElem{
+    width: 100%;
+    height: 100%;
+    display: none;
+    padding: 20px 10px;
+    position: absolute;
+    background-color: var(--pri);
+}
+.fullElem .fullElem-heading{
+    transition: all ease 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.fullElem .fullElem-heading .back{
+    background-color: var(--tri1);
+    color: var(--pri);
+    font-weight: 500;
+    padding: 5px 8px;
+    border: none;
+    font-size: 20px;
+    border-radius: 10px;
+    opacity: 70%;
+}
+.fullElem .fullElem-heading .back:active{
+    scale: 0.95;
+}
+
+.todo-fullpage h1{
+    color: var(--tri2);
+    font-size: 65px;
+    opacity: 80%;
+}
+.todo-fullpage .todo-container{
+    width: 100%;
+    height: 80%;
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.todo-fullpage .todo-container .addTask{
+    width: 33%;
+    height: 100%;
+    background-color: var(--sec);
+    border-radius: 20px;
+}
+.todo-fullpage .todo-container .addTask form{
+    height: 100%;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.todo-fullpage .todo-container .addTask form #task-name{
+    padding: 8px 10px;
+    font-size: 20px;
+    height: 10%;
+    background-color: var(--tri2);
+    border-radius: 10px;
+    border: none;
+    outline: none;
+
+}
+.todo-fullpage .todo-container .addTask form textarea{
+    padding: 8px 10px;
+    font-size: 20px;
+    height: 70%;
+    max-width: 100%;
+    background-color: var(--tri2);
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+.todo-fullpage .todo-container .addTask form button{
+    padding: 8px 10px;
+    font-size: 20px;
+    opacity: 90%;
+    font-weight: 500;
+    height: 10%;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: var(--tri1);
+}
+.todo-fullpage .todo-container .addTask form button:active{
+    scale: 0.95;
+}
+.todo-fullpage .todo-container .allTask{
+    width: 65%;
+    height: 100%;
+    background-color: var(--sec);
+    border-radius: 20px;
+}
+.todo-fullpage .todo-container .allTask{
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow: auto;
+}
+.todo-fullpage .todo-container .allTask .task{
+
+    padding: 12px 18px;
+    background-color: var(--tri2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 15px;
+}
+.todo-fullpage .todo-container .allTask .task div{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.todo-fullpage .todo-container .allTask .task h2{
+    font-size: 25px;
+    color: #111;
+    font-weight: 500;
+    opacity: 95%;
+}
+.todo-fullpage .todo-container .allTask .task span{
+    padding: 4px 5px;
+    border-radius: 10px;
+    font-size: 10px;
+    color: var(--tri2);
+    background-color: rgba(253, 29, 29, 0.935);
+    font-weight: 500;
+    opacity: 1;   
+}
+.todo-fullpage .todo-container .allTask .task span.false{
+    opacity: 0;
+}
+.todo-fullpage .todo-container .allTask .task button{
+    padding: 5px 8px;
+    font-size: 16px;
+    background-color: rgba(0, 128, 0, 0.668);
+    color: var(--tri2);
+    border: none;
+    border-radius: 10px;
+}
+.mark-imp{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0 5px;
+}
+.mark-imp input{
+    scale: 1.3;
+}
+.mark-imp label{
+    font-weight: 500;
+    font-size: 18px;
+    opacity: 80%;
+}
