@@ -137,3 +137,80 @@ function motivationalQuote() {
     fetchQuote()
 }
 motivationalQuote()
+
+function pomodoroTimer() {
+
+
+    let timer = document.querySelector('.pomo-timer h1')
+    var startBtn = document.querySelector('.pomo-timer .start')
+    var pauseBtn = document.querySelector('.pomo-timer .pause')
+    var resetBtn = document.querySelector('.pomo-timer .reset')
+    var session = document.querySelector('.pomodoro-fullpage .pomo-status')
+    var isWorkSession = true
+
+    let totalSeconds = 25 * 60
+    let timerInterval = null
+
+    function updateTimer() {
+        let minutes = Math.floor(totalSeconds / 60)
+        let seconds = totalSeconds % 60
+
+        timer.innerHTML = `${String(minutes).padStart('2', '0')}:${String(seconds).padStart('2', '0')}`
+    }
+
+    function startTimer() {
+        clearInterval(timerInterval)
+
+        if (isWorkSession) {
+
+            timerInterval = setInterval(function () {
+                if (totalSeconds > 0) {
+                    totalSeconds--
+                    updateTimer()
+                } else {
+                    isWorkSession = false
+                    clearInterval(timerInterval)
+                    timer.innerHTML = '05:00'
+                    session.innerHTML = "Enjoy It's Break Time"
+                    session.style.color = 'rgb(64, 170, 206)'
+                    totalSeconds = 5 * 60
+                }
+            }, 1000)
+        } else {
+
+
+            timerInterval = setInterval(function () {
+                if (totalSeconds > 0) {
+                    totalSeconds--
+                    updateTimer()
+                } else {
+                    isWorkSession = true
+                    clearInterval(timerInterval)
+                    timer.innerHTML = '25:00'
+                    session.innerHTML = "It's Working Time"
+                    session.style.color = '#D4A373'
+                    totalSeconds = 25 * 60
+                }
+            }, 1000)
+        }
+
+    }
+
+    function pauseTimer() {
+        clearInterval(timerInterval)
+    }
+    function resetTimer() {
+        totalSeconds = 25 * 60
+        clearInterval(timerInterval)
+        updateTimer()
+
+    }
+    startBtn.addEventListener('click', startTimer)
+    pauseBtn.addEventListener('click', pauseTimer)
+    resetBtn.addEventListener('click', resetTimer)
+
+
+
+}
+
+pomodoroTimer()
