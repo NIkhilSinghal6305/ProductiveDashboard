@@ -16,7 +16,7 @@ function openFeatures() {
   });
 }
 openFeatures();
-    
+
 function todoList() {
   let currentTask = [];
 
@@ -76,3 +76,49 @@ function todoList() {
   });
 }
 todoList();
+
+function DayPlannerDashboard() {
+  var dayPlannerInput = document.querySelectorAll(".day-planner input");
+  var dayPlanner = document.querySelector(".day-planner");
+  var deleteDayPlanner = document.querySelector(".day-planner-delete");
+
+  var hours = Array.from(
+    { length: 24 },
+    (elem, idx) => `${0 + idx}:00 - ${1 + idx}:00 `
+  );
+  var dayPlanData = JSON.parse(localStorage.getItem("dayPlanData")) || {};
+
+  let Wholedaysum = "";
+
+  function renderDay() {
+    hours.forEach(function (elem, idx) {
+      var saveData = dayPlanData[idx] || "";
+      Wholedaysum += `
+        <div class="day-planner-time">
+        <p>${elem}</p>
+        <input id="${idx}" type="text" placeholder="..." value='${saveData}'>
+        </div>
+        `;
+    });
+    dayPlanner.innerHTML = Wholedaysum;
+  }
+  renderDay();
+
+
+  dayPlannerInput.forEach(function (elem) {
+    elem.addEventListener("input", function () {
+      dayPlanData[elem.id] = elem.value;
+      localStorage.setItem("dayPlanData", JSON.stringify(dayPlanData));
+    });
+  });
+
+  deleteDayPlanner.addEventListener("click", function () {
+    dayPlanData = {};
+    localStorage.removeItem("dayPlanData");
+    document.querySelectorAll(".day-planner input").forEach(function (input) {
+      input.value = "";
+    });
+  });
+}
+DayPlannerDashboard();
+
