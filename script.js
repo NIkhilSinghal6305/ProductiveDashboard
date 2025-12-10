@@ -130,10 +130,10 @@ function motivationalQuote() {
   var motivationAuthor = document.querySelector(".motivation-3 h2");
 
   async function fetchQuote() {
-    let response = await fetch("https://api.quotable.io/random");
+    let response = await fetch("https://motivational-spark-api.vercel.app/api/quotes/random");
     let data = await response.json();
 
-    motivationQuoteContent.innerHTML = data.content;
+    motivationQuoteContent.innerHTML = data.quote;
     motivationAuthor.innerHTML = data.author;
   }
 
