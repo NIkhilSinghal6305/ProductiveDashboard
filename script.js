@@ -233,7 +233,7 @@ async function weatherAPICall() {
 weatherAPICall()  
 setInterval(function () {
   weatherAPICall();
-}, 100000);
+}, 3000);
 
 function DayTime() {
   let Week = [
