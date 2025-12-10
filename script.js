@@ -218,7 +218,7 @@ async function weatherAPICall() {
   var humidity = document.querySelector(".header2 .humidity");
   var wind = document.querySelector(".header2 .wind");
 
-  var response = await fetch( `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}` );
+  var response = await fetch( `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}` );
   var data = await response.json();
 
   document.querySelector(".header1 h2").innerHTML =
