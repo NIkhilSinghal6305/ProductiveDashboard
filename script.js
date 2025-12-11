@@ -23,7 +23,6 @@ openFeatures();
 
 function todoList() {
   let currentTask = [];
-
   if (localStorage.getItem("currentTask")) {
     currentTask = JSON.parse(localStorage.getItem("currentTask"));
   } else {
@@ -34,24 +33,47 @@ function todoList() {
     let sum = "";
     currentTask.forEach(function (elem, idx) {
       sum += `
-        <div class="task">
-        <div>
-        <h2>${elem.task}</h2>
-        <span class='${elem.impo}'>important</span>
+        <div class="task" data-index="${idx}">
+          <div>
+            <h2>${elem.task}</h2>
+            <span class='${elem.impo ? "important" : ""}'>important</span>
+          </div>
+          <button class="complete" data-index="${idx}">Mark as Complete</button>
         </div>
-        <button class="complete" id="${idx}"> Mark as Complete</button>
+        <div class="task-details" data-index="${idx}" style="display: none;">
+          <p>${elem.details || "No details provided"}</p>
         </div>
-        `;
+      `;
     });
-
     alltask.innerHTML = sum;
     localStorage.setItem("currentTask", JSON.stringify(currentTask));
 
-    document.querySelectorAll(".task button").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        currentTask.splice(btn.id, 1);
-        renderTask();
+    
+    document.querySelectorAll(".task").forEach(function (taskDiv) {
+      taskDiv.addEventListener("click", function (e) {
+        
+        if (e.target.tagName === "BUTTON") return;
 
+        const index = taskDiv.getAttribute("data-index");
+        const detailsDiv = document.querySelector(
+          `.task-details[data-index="${index}"]`
+        );
+
+        if (detailsDiv.style.display === "none") {
+          detailsDiv.style.display = "block";
+        } else {
+          detailsDiv.style.display = "none";
+        }
+      });
+    });
+
+
+    document.querySelectorAll(".task button").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        const index = btn.getAttribute("data-index");
+        currentTask.splice(index, 1);
+        renderTask();
         if (currentTask.length == 0) {
           localStorage.clear();
         }
@@ -60,6 +82,7 @@ function todoList() {
   }
 
   renderTask();
+
   let form = document.querySelector(".addTask form");
   let taskinput = document.querySelector(".addTask form input");
   let taskDetailsinput = document.querySelector(".addTask form textarea");
@@ -75,7 +98,6 @@ function todoList() {
     taskDetailsinput.value = "";
     taskinput.value = "";
     checkImpo.checked = false;
-
     renderTask();
   });
 }
@@ -130,7 +152,9 @@ function motivationalQuote() {
   var motivationAuthor = document.querySelector(".motivation-3 h2");
 
   async function fetchQuote() {
-    let response = await fetch("https://motivational-spark-api.vercel.app/api/quotes/random");
+    let response = await fetch(
+      "https://motivational-spark-api.vercel.app/api/quotes/random"
+    );
     let data = await response.json();
 
     motivationQuoteContent.innerHTML = data.quote;
@@ -211,18 +235,21 @@ pomodoroTimer();
 
 async function weatherAPICall() {
   const city = "Jaipur";
-  const API_KEY = '54a5314cf4ca4ae0b7073636251012'
+  const API_KEY = "54a5314cf4ca4ae0b7073636251012";
   var temperature = document.querySelector(".header2 h1");
   var condition = document.querySelector(".header2 h2");
   var precipitation = document.querySelector(".header2 .precipitation");
   var humidity = document.querySelector(".header2 .humidity");
   var wind = document.querySelector(".header2 .wind");
 
-  var response = await fetch( `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}` );
+  var response = await fetch(
+    `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`
+  );
   var data = await response.json();
 
-  document.querySelector(".header1 h2").innerHTML =
-    `${city} (${data.location.region})`;
+  document.querySelector(
+    ".header1 h2"
+  ).innerHTML = `${city} (${data.location.region})`;
 
   temperature.innerHTML = `${data.current.temp_c}°C`;
   condition.innerHTML = data.current.condition.text;
@@ -230,7 +257,7 @@ async function weatherAPICall() {
   humidity.innerHTML = `Humidity: ${data.current.humidity}`;
   wind.innerHTML = `Wind: ${data.current.wind_kph} Km/h`;
 }
-weatherAPICall()  
+weatherAPICall();
 setInterval(function () {
   weatherAPICall();
 }, 3000);
@@ -326,4 +353,3 @@ function ChangeTheme() {
   });
 }
 ChangeTheme();
-
