@@ -36,7 +36,7 @@ function todoList() {
         <div class="task" data-index="${idx}">
           <div>
             <h2>${elem.task}</h2>
-            <span class='${elem.impo ? "important" : ""}'>important</span>
+            <span class='${elem.impo}'>important</span>
           </div>
           <button class="complete" data-index="${idx}">Mark as Complete</button>
         </div>

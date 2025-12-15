@@ -444,6 +444,8 @@ section.allElems .allfeatures .features-heading h1 {
   background-color: red;
   color: var(--tri2);
   font-weight: 500;
+}
+.todo-fullpage .todo-container .allTask .task span.true {
   opacity: 1;
 }
 .todo-fullpage .todo-container .allTask .task span.false {
