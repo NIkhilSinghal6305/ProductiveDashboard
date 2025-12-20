@@ -359,3 +359,21 @@ function ChangeTheme() {
   });
 }
 ChangeTheme();
+
+function NavAnimation() {
+  const main = document.getElementById("main");
+  const nav = document.querySelector("nav");
+
+  main.addEventListener("wheel", function (e) {
+    if (e.deltaY > 0) {
+      console.log(e);
+      
+      nav.classList.add("navOut");
+      nav.classList.remove("navIn")
+    } else {
+      nav.classList.add("navIn");
+      nav.classList.remove("navOut")
+    }
+  });
+}
+NavAnimation();
