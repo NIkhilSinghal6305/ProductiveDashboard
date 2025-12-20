@@ -1,5 +1,5 @@
 function openFeatures() {
-  landingPage = document.querySelector("section.allElems");
+  var landingPage = document.querySelector("section.allElems");
   var allElems = document.querySelectorAll(".elem");
   var allfullElem = document.querySelectorAll(".fullElem");
   var allfullElemBack = document.querySelectorAll(".fullElem .back");
@@ -8,6 +8,34 @@ function openFeatures() {
     elem.addEventListener("click", function () {
       allfullElem[elem.id].style.display = "block";
       landingPage.style.display = "none";
+
+      if (elem.id == 0) {
+        updateMeta(
+          "To-Do List | Productivity Dashboard",
+          "Organize daily tasks using a simple and effective to-do list for students."
+        );
+      }
+
+      if (elem.id == 1) {
+        updateMeta(
+          "Daily Planner | Productivity Dashboard",
+          "Plan your entire day efficiently with a clean daily planner for students."
+        );
+      }
+
+      if (elem.id == 3) {
+        updateMeta(
+          "Pomodoro Timer | Productivity Dashboard",
+          "Stay focused and boost productivity using a Pomodoro timer designed for students."
+        );
+      }
+
+      if (elem.id == 2) {
+        updateMeta(
+          "Motivational Quotes | Productivity Dashboard",
+          "Read daily motivational quotes to stay inspired, positive, and focused throughout the day."
+        );
+      }
     });
   });
 
@@ -16,10 +44,21 @@ function openFeatures() {
       allfullElem[back.id].style.display = "none";
       landingPage.style.display = "flex";
       landingPage.style.flexDirection = "column";
+
+      updateMeta(
+        "Productivity Dashboard for Students",
+        "A clean productivity dashboard for students to plan daily tasks, manage time with Pomodoro, and stay focused throughout the day.",
+        "icons/home.ico"
+      );
+      let nav = document.querySelector("nav");
+      nav.classList.remove("navIn")
+      nav.classList.remove("navOut")
     });
   });
 }
+
 openFeatures();
+
 
 function todoList() {
   let currentTask = [];
@@ -100,6 +139,12 @@ function todoList() {
     checkImpo.checked = false;
     renderTask();
   });
+
+  updateMeta(
+  "To-Do List | Productivity Dashboard",
+  "Organize your daily tasks with a simple and effective to-do list for students.",
+);
+
 }
 todoList();
 
@@ -365,15 +410,26 @@ function NavAnimation() {
   const nav = document.querySelector("nav");
 
   main.addEventListener("wheel", function (e) {
-    if (e.deltaY > 0) {
-      console.log(e);
-      
+    if (e.deltaY > 0) {     
       nav.classList.add("navOut");
       nav.classList.remove("navIn")
-    } else {
+    } else if(e.deltaY < 0){
       nav.classList.add("navIn");
       nav.classList.remove("navOut")
     }
   });
 }
 NavAnimation();
+
+function updateMeta(title, description) {
+  document.title = title;
+
+  document
+    .querySelector("#page-description")
+    .setAttribute("content", description);
+}
+updateMeta(
+        "Productivity Dashboard for Students",
+        "A clean productivity dashboard for students to plan daily tasks, manage time with Pomodoro, and stay focused throughout the day.",
+        "icons/home.ico"
+      );

@@ -72,18 +72,18 @@ section.allElems nav {
   border-radius: 10px;
   -webkit-transition: all ease 0.5s;
   -o-transition: all ease 0.5s;
- transition: opacity 10s ease, transform 0.4s ease;
+ transition: transform 0.4s ease;
   position: sticky;
   top: 3%;
   z-index: 1000;
 }
 .navOut{
   pointer-events: none;
-  animation: NavBarOut 0.5s ease-in-out  both;
+  animation: NavBarOut 1s ease-in-out  both;
 }
 .navIn{
   pointer-events: auto;
-  animation: NavBarIn 0.5s ease-in-out forwards;
+  animation: NavBarIn 0.7s ease-in-out forwards;
 }
 @keyframes NavBarOut {
   from {
@@ -97,16 +97,22 @@ section.allElems nav {
 }
 
 @keyframes NavBarIn {
-  from {
+  0% {
     opacity: 0;
     transform: translateY(-20px);
   }
-  to {
+  10% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100%{
     opacity: 1;
     transform: translateY(0);
   }
 }
-
+button{
+  cursor: pointer;
+}
 section.allElems nav h1 {
   font-size: 40px;
   color: var(--black);
